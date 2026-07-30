@@ -17,12 +17,8 @@ COPY src ./src
 # Generate Prisma client
 RUN npx prisma generate
 
-# Build TypeScript - install typescript explicitly and compile
-RUN npm install typescript@5.3.3 --save-dev
-RUN ./node_modules/.bin/tsc -p tsconfig.json
-
-# Verify dist was created
-RUN ls -la dist/ && ls -la dist/main.js
+# Build TypeScript
+RUN ./node_modules/.bin/tsc -p tsconfig.json --listEmittedFiles
 
 EXPOSE 3001
 
