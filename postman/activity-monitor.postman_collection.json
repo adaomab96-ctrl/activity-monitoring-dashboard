@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "Real-Time Activity Monitor API",
+    "description": "Complete API collection for the Real-Time Activity Monitoring System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Create Event - ENTRY",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"ENTRY\",\n  \"message\": \"Visitor entered the main building\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Event - LOGIN",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"LOGIN\",\n  \"message\": \"Admin signed in to the console\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Event - ALERT",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"ALERT\",\n  \"message\": \"Multiple failed login attempts detected\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Event - SYSTEM",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"SYSTEM\",\n  \"message\": \"Monitoring agent restarted\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Event - Validation Error (invalid type)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"INVALID\",\n  \"message\": \"This should fail validation\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Event - Validation Error (missing message)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": "{{baseUrl}}/events",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"ENTRY\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Events",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events"
+          }
+        },
+        {
+          "name": "Get Latest Events",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/events/latest"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get All Notifications",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/notifications"
+          }
+        }
+      ]
+    }
+  ]
+}

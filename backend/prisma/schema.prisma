@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EventType {
+  ENTRY
+  LOGIN
+  ALERT
+  SYSTEM
+}
+
+model Event {
+  id            Int            @id @default(autoincrement())
+  eventType     EventType
+  message       String
+  createdAt     DateTime       @default(now())
+  notifications Notification[]
+
+  @@map("events")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  eventId   Int
+  channel   String   @default("IN_APP")
+  status    String   @default("SENT")
+  createdAt DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
