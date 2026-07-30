@@ -14,12 +14,15 @@ RUN npm install
 COPY prisma ./prisma
 COPY src ./src
 
-# Generate Prisma client and build TypeScript
+# Generate Prisma client
 RUN npx prisma generate
-RUN npx tsc -p tsconfig.json
 
-# Remove dev dependencies
-RUN npm prune --omit=dev
+# Build TypeScript - install typescript explicitly and compile
+RUN npm install typescript@5.3.3 --save-dev
+RUN ./node_modules/.bin/tsc -p tsconfig.json
+
+# Verify dist was created
+RUN ls -la dist/ && ls -la dist/main.js
 
 EXPOSE 3001
 
